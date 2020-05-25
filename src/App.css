@@ -1,0 +1,53 @@
+.App {
+	text-align: center;
+}
+.content {
+	color: #900;
+	display: block;
+}
+
+form {
+	margin-top: 50px;
+}
+
+form > input {
+	font-size: 20px;
+	font-weight: bold;
+	background: #3abcff;
+	border: 0px;
+	border-bottom: 2px solid #74e6ff;
+	border-radius: 3px;
+	color: #fff;
+	text-align: center;
+	width: 40%;
+	height: 50px;
+	margin-left: 30%;
+	margin-top: 30px;
+	cursor: pointer;
+	display: block;
+	transition: color 0.3s 0s, border-color 0.3s 0s, border 0.3s 0s, width 0.3s 0s,
+		height 0.3s 0s;
+}
+
+.box {
+	border: 3px solid #84ebf1;
+	border-radius: 3px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 30px;
+	text-align: center;
+	text-decoration: none;
+	width: 40%;
+	height: px;
+	margin-left: 30%;
+	margin-top: 50px;
+	cursor: pointer;
+	overflow: hidden;
+	display: block;
+	transition: color 0.3s 0s, border-color 0.3s 0s;
+}
+
+form > input:focus {
+	outline: none;
+	border-color: #2deef8;
+}
