@@ -10,12 +10,16 @@ export default class FinalCalculation extends Component {
 		volts: 12,
 		ah: 0,
 		step: 1,
+		number: 1,
+		data: [],
 	};
-	powerChanger = (pow, stepval) => {
+	powerChanger = (pow, stepval, dat, num) => {
 		this.setState(
 			{
 				power: pow,
 				step: stepval,
+				data: dat,
+				number: num,
 			},
 			() => {
 				let calVA = Math.ceil(this.state.power / this.state.pf);
@@ -51,11 +55,18 @@ export default class FinalCalculation extends Component {
 
 	render() {
 		if (this.state.step === 1) {
-			return <DeviceAdder changer={this.powerChanger} />;
+			return (
+				<DeviceAdder
+					changer={this.powerChanger}
+					dat={this.state.data}
+					num={this.state.number}
+				/>
+			);
 		} else {
 			return (
 				<div className="content">
 					<form>
+						<label>Total power Requirement in Watts</label>
 						<input
 							type="number"
 							placeholder="total power"
@@ -65,7 +76,7 @@ export default class FinalCalculation extends Component {
 								this.textChangeHandler(e);
 							}}
 						/>
-
+						<label>Power Factor</label>
 						<input
 							type="number"
 							placeholder="Power Factor"
@@ -76,6 +87,7 @@ export default class FinalCalculation extends Component {
 							}}
 						/>
 
+						<label>Battery Voltage in Volts</label>
 						<input
 							type="number"
 							placeholder="Battery Voltage"
@@ -86,6 +98,7 @@ export default class FinalCalculation extends Component {
 							}}
 						/>
 
+						<label>Required Backup Time in Hrs</label>
 						<input
 							type="number"
 							placeholder="Backup Time"
@@ -96,10 +109,12 @@ export default class FinalCalculation extends Component {
 							}}
 						/>
 						<br />
+						<label>You Require: </label>
 						<span id="va" className="box">
 							{this.state.va} VA Inverter
 						</span>
 						<br />
+						<label>And</label>
 						<span id="va" className="box">
 							{this.state.ah}AH Battery
 						</span>

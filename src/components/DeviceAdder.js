@@ -1,75 +1,64 @@
 import React, { Component } from 'react';
+const { random } = require('../functions/funcs');
 
 export class DeviceAdder extends Component {
 	state = {
-		a: 10,
-		b: 20,
-		c: 30,
-		d: 40,
-		e: 50,
+		inputNumber: 5,
+		data: {},
+		try: 1,
 	};
 
 	clickHandler = (e) => {
 		e.preventDefault();
 		let sum = 0;
 		// eslint-disable-next-line
-		Object.keys(this.state).map((i) => {
-			sum += this.state[i];
-		});
-
+		for (let key in this.data) {
+			sum += this.data[key].value;
+		}
 		// console.log('Sum:', sum);
-		this.props.changer(sum, 2);
+		this.props.changer(sum, 2, this.data, this.state.inputNumber);
 	};
 
 	textChangeHandler = (e) => {
-		this.setState({
-			[e.target.name]: Number(e.target.value),
-		});
+		this.data[Number(e.target.id)].value = Number(e.target.value);
+		this.forceUpdate();
 	};
+
+	data = this.props.dat;
+
 	render() {
+		// console.log('Props::', this.props);
+		if (this.state.try === 1) {
+			this.setState({
+				inputNumber: this.props.num,
+				try: 2,
+			});
+		}
+		let inpArray = [];
+		for (let i = 0; i < this.state.inputNumber; i++) {
+			if (this.data[i] === undefined) {
+				let rnd = random(4);
+				this.data[i] = { name: rnd, value: 10 };
+			}
+
+			inpArray.push(
+				<input
+					type="number"
+					id={i}
+					name={this.data[i].name}
+					value={this.data[i].value}
+					onChange={(e) => {
+						this.textChangeHandler(e);
+					}}
+				/>
+			);
+		}
+
 		return (
 			<div className="content">
 				<form>
-					<input
-						type="number"
-						name="a"
-						onChange={(e) => {
-							this.textChangeHandler(e);
-						}}
-						value={this.state.a}
-					/>
-					<input
-						type="number"
-						name="b"
-						onChange={(e) => {
-							this.textChangeHandler(e);
-						}}
-						value={this.state.b}
-					/>
-					<input
-						type="number"
-						name="c"
-						onChange={(e) => {
-							this.textChangeHandler(e);
-						}}
-						value={this.state.c}
-					/>
-					<input
-						type="number"
-						name="d"
-						onChange={(e) => {
-							this.textChangeHandler(e);
-						}}
-						value={this.state.d}
-					/>
-					<input
-						type="number"
-						name="e"
-						onChange={(e) => {
-							this.textChangeHandler(e);
-						}}
-						value={this.state.e}
-					/>
+					<label>Enter the deivce power in Watts</label>
+					{inpArray}
 					<div
 						className="box"
 						onClick={(e) => {
@@ -77,6 +66,16 @@ export class DeviceAdder extends Component {
 						}}
 					>
 						Done
+					</div>
+					<div
+						className="box"
+						onClick={() => {
+							this.setState({
+								inputNumber: this.state.inputNumber + 1,
+							});
+						}}
+					>
+						Add device
 					</div>
 				</form>
 			</div>
