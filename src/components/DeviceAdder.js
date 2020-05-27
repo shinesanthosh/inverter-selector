@@ -3,7 +3,7 @@ const { random } = require('../functions/funcs');
 
 export class DeviceAdder extends Component {
 	state = {
-		inputNumber: 5,
+		inputNumber: 0,
 		data: {},
 		try: 1,
 	};
@@ -15,7 +15,7 @@ export class DeviceAdder extends Component {
 		for (let key in this.data) {
 			sum += this.data[key].value;
 		}
-		// console.log('Sum:', sum);
+		console.log('Sum:', sum);
 		this.props.changer(sum, 2, this.data, this.state.inputNumber);
 	};
 
@@ -27,7 +27,7 @@ export class DeviceAdder extends Component {
 	data = this.props.dat;
 
 	render() {
-		// console.log('Props::', this.props);
+		console.log('Props::', this.props);
 		if (this.state.try === 1) {
 			this.setState({
 				inputNumber: this.props.num,
