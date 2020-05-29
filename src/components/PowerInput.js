@@ -6,24 +6,31 @@ export class PowerInput extends Component {
 		val: 10,
 		deviceName: '',
 		tryno: 1,
+		times: 1,
 	};
 
 	deviceDetails = [
 		{ deviceName: 'Reading Lamp', devicePower: 10 },
 		{ deviceName: 'Fan', devicePower: 65 },
 		{ deviceName: 'Home Theatre', devicePower: 100 },
-		{ deviceName: 'Ceiling Ligt', devicePower: 40 },
+		{ deviceName: 'Ceiling Light', devicePower: 40 },
 	];
 
-	changeHandler = (e) => {
-		this.setState(
-			{
-				val: e.target.value,
-			},
-			() => {
-				this.props.changeHandler(this.props.id, this.state.val);
-			}
+	updateState = () => {
+		this.props.changeHandler(
+			this.props.id,
+			this.state.val,
+			this.state.deviceName,
+			this.state.times
 		);
+	};
+
+	timesChangeHandler = (e) => {
+		this.setState({ times: e.target.value }, this.updateState);
+	};
+
+	changeHandler = (e) => {
+		this.setState({ val: e.target.value }, this.updateState);
 	};
 
 	powerChangeHandler = (e) => {
@@ -36,13 +43,7 @@ export class PowerInput extends Component {
 				devname = e.target.value;
 			}
 		});
-		this.setState({ val: pow, deviceName: devname }, () => {
-			this.props.changeHandler(
-				this.props.id,
-				this.state.val,
-				this.state.deviceName
-			);
-		});
+		this.setState({ val: pow, deviceName: devname }, this.updateState);
 	};
 
 	render() {
@@ -50,9 +51,13 @@ export class PowerInput extends Component {
 			this.setState({
 				val: this.props.value,
 				tryno: 2,
+				deviceName:
+					this.props.devname === undefined
+						? this.deviceDetails[0].deviceName
+						: this.props.devname,
+				times: this.props.times === undefined ? '1' : this.props.times,
 			});
 		}
-
 		const deviceArray = [];
 
 		for (let i = 0; i < this.deviceDetails.length; i++)
@@ -67,17 +72,26 @@ export class PowerInput extends Component {
 					onChange={(e) => {
 						this.powerChangeHandler(e);
 					}}
-					value={this.props.devname}
+					value={this.state.deviceName}
 				>
 					{deviceArray}
 				</select>
 				<input
 					type="number"
+					className="text"
 					id={this.props.id}
 					name={this.props.name}
 					value={this.state.val}
 					onChange={(e) => {
 						this.changeHandler(e);
+					}}
+				/>
+				<label> X</label>
+				<input
+					type="number"
+					value={this.state.times}
+					onChange={(e) => {
+						this.timesChangeHandler(e);
 					}}
 				/>
 			</div>

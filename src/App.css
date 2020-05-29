@@ -38,7 +38,7 @@ form > div > input {
 	color: #3abcff;
 	text-align: center;
 	display: inline;
-	width: 30%;
+	width: 10%;
 	height: 50px;
 	margin-left: 10px;
 	margin-top: 30px;
@@ -76,7 +76,7 @@ form > div > select {
 	color: #3abcff;
 	text-align: center;
 	display: inline;
-	width: 30%;
+	width: 25%;
 	height: 50px;
 	margin-left: 0;
 	margin-top: 30px;
@@ -126,4 +126,7 @@ form > div > input:focus {
 form > input:focus {
 	outline: none;
 	border-color: #2deef8;
+}
+
+.text {
 }

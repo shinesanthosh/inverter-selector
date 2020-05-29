@@ -14,15 +14,16 @@ export class DeviceAdder extends Component {
 		let sum = 0;
 		// eslint-disable-next-line
 		for (let key in this.data) {
-			sum += this.data[key].value;
+			sum += this.data[key].value * this.data[key].times;
 		}
 		// console.log('Sum:', sum);
 		this.props.changer(sum, 2, this.data, this.state.inputNumber);
 	};
 
-	textChangeHandler = (id, val, deviceName) => {
+	textChangeHandler = (id, val, deviceName, deviceTimes) => {
 		this.data[Number(id)].value = Number(val);
 		this.data[Number(id)].devname = deviceName;
+		this.data[Number(id)].times = Number(deviceTimes);
 		this.forceUpdate();
 	};
 
@@ -49,9 +50,10 @@ export class DeviceAdder extends Component {
 					id={i}
 					name={this.data[i].name}
 					value={this.data[i].value}
+					times={this.data[i].times}
 					devname={this.data[i].devname}
-					changeHandler={(id, val, deviceName) => {
-						this.textChangeHandler(id, val, deviceName);
+					changeHandler={(id, val, deviceName, deviceTimes) => {
+						this.textChangeHandler(id, val, deviceName, deviceTimes);
 					}}
 				/>
 			);
@@ -60,7 +62,7 @@ export class DeviceAdder extends Component {
 		return (
 			<div className="content">
 				<form>
-					<label>Enter the deivce power in Watts</label>
+					<label>Enter the device power in Watts</label>
 					{inpArray}
 					<div
 						className="box"
