@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-const { random } = require('../functions/funcs');
+import PowerInput from './PowerInput';
 
+const { random } = require('../functions/funcs');
 export class DeviceAdder extends Component {
 	state = {
 		inputNumber: 0,
 		data: {},
-		try: 1,
+		tryno: 1,
 	};
 
 	clickHandler = (e) => {
@@ -15,23 +16,24 @@ export class DeviceAdder extends Component {
 		for (let key in this.data) {
 			sum += this.data[key].value;
 		}
-		console.log('Sum:', sum);
+		// console.log('Sum:', sum);
 		this.props.changer(sum, 2, this.data, this.state.inputNumber);
 	};
 
-	textChangeHandler = (e) => {
-		this.data[Number(e.target.id)].value = Number(e.target.value);
+	textChangeHandler = (id, val, deviceName) => {
+		this.data[Number(id)].value = Number(val);
+		this.data[Number(id)].devname = deviceName;
 		this.forceUpdate();
 	};
 
-	data = this.props.dat;
+	data = [...this.props.dat];
 
 	render() {
-		console.log('Props::', this.props);
-		if (this.state.try === 1) {
+		// console.log('Props::', this.props);
+		if (this.state.tryno === 1) {
 			this.setState({
 				inputNumber: this.props.num,
-				try: 2,
+				tryno: 2,
 			});
 		}
 		let inpArray = [];
@@ -42,13 +44,14 @@ export class DeviceAdder extends Component {
 			}
 
 			inpArray.push(
-				<input
-					type="number"
+				<PowerInput
+					key={i}
 					id={i}
 					name={this.data[i].name}
 					value={this.data[i].value}
-					onChange={(e) => {
-						this.textChangeHandler(e);
+					devname={this.data[i].devname}
+					changeHandler={(id, val, deviceName) => {
+						this.textChangeHandler(id, val, deviceName);
 					}}
 				/>
 			);

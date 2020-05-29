@@ -11,6 +11,7 @@ form {
 	width: 90%;
 	height: 90%;
 	text-align: center;
+	display: block;
 	margin-left: 5%;
 	margin-top: 30px;
 }
@@ -23,6 +24,29 @@ form > label {
 	font-size: 20px;
 }
 
+form > div {
+	display: block;
+}
+
+form > div > input {
+	font-size: 20px;
+	font-weight: bold;
+	background: #fff;
+	border: 0px;
+	border-bottom: 2px solid #74e6ff;
+	border-radius: 3px;
+	color: #3abcff;
+	text-align: center;
+	display: inline;
+	width: 30%;
+	height: 50px;
+	margin-left: 10px;
+	margin-top: 30px;
+	cursor: pointer;
+	transition: color 0.3s 0s, border-color 0.3s 0s, border 0.3s 0s, width 0.3s 0s,
+		height 0.3s 0s;
+}
+
 form > input {
 	font-size: 20px;
 	font-weight: bold;
@@ -32,14 +56,48 @@ form > input {
 	border-radius: 3px;
 	color: #3abcff;
 	text-align: center;
+	display: block;
 	width: 40%;
 	height: 50px;
 	margin-left: 30%;
 	margin-top: 30px;
 	cursor: pointer;
-	display: block;
 	transition: color 0.3s 0s, border-color 0.3s 0s, border 0.3s 0s, width 0.3s 0s,
 		height 0.3s 0s;
+}
+
+form > div > select {
+	font-size: 20px;
+	font-weight: bold;
+	background: #fff;
+	border: 0px;
+	border-bottom: 2px solid #74e6ff;
+	border-radius: 3px;
+	color: #3abcff;
+	text-align: center;
+	display: inline;
+	width: 30%;
+	height: 50px;
+	margin-left: 0;
+	margin-top: 30px;
+	cursor: pointer;
+	transition: color 0.3s 0s, border-color 0.3s 0s, border 0.3s 0s, width 0.3s 0s,
+		height 0.3s 0s;
+}
+
+form > div > select > option {
+	width: 30%;
+	height: 50px;
+	text-decoration: none;
+	outline: none;
+}
+
+form > div > label {
+	text-align: center;
+	margin: 30px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 .box {
@@ -58,6 +116,11 @@ form > input {
 	overflow: hidden;
 	display: block;
 	transition: color 0.3s 0s, border-color 0.3s 0s;
+}
+
+form > div > input:focus {
+	outline: none;
+	border-color: #2deef8;
 }
 
 form > input:focus {
